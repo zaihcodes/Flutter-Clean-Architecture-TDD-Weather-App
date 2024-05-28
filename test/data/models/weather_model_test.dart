@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture_tdd_weather_app/data/models/weather_model.dart';
 import 'package:flutter_clean_architecture_tdd_weather_app/domain/entities/weather.dart';
@@ -29,9 +31,10 @@ void main() {
   test('Should return a valide model from json ', () async {
     // arrange
     // act
-    final weatherJson =
-        await readJson('helpers/dummy_data/dummy_weather_response.json');
+    final weatherString =
+        readJson('helpers/dummy_data/dummy_weather_response.json');
 
+    final weatherJson = jsonDecode(weatherString);
     final weatherModel = WeatherModel.fromJson(weatherJson);
     // assert
     expect(weatherModel, testWeatherModel);
